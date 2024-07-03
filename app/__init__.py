@@ -2,9 +2,18 @@ from flask import Flask
 from flask_session import Session
 from flask_migrate import Migrate
 from .extensions import db, login_manager
+
+# blueprints
 from .auth import auth as auth_blueprint
+from .budget import budget as budget_blueprint
+from .expense import expense as expense_blueprint
 from .main import main as main_blueprint
+
+# models
 from .models import User
+from .budget.models import Budget
+from .expense.models import Expense, ExpenseCategory, ExpenseCategoryItem
+
 
 
 def create_app():
@@ -16,6 +25,7 @@ def create_app():
 
 	# Initialize extensions
 	db.init_app(app)
+	# db.create_all()
 	migrate = Migrate(app, db)
 	login_manager.init_app(app)
 
@@ -27,6 +37,8 @@ def create_app():
 
 	# Register blueprints
 	app.register_blueprint(auth_blueprint)
+	app.register_blueprint(budget_blueprint)
+	app.register_blueprint(expense_blueprint)
 	app.register_blueprint(main_blueprint)
 
 	return app
