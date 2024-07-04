@@ -2,11 +2,14 @@ from ..extensions import db
 
 
 class Budget(db.Model):
-	__tablename__ = 'budget'
+	__tablename__ = 'budgets'
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(120), nullable=False)
 	start_date = db.Column(db.Date, nullable=False)
 	end_date = db.Column(db.Date, nullable=False)
-	limit = db.Column(db.Float, nullable=False)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-	user = db.relationship('User', backref=db.backref('budgets', lazy=True))
+	amount = db.Column(db.Float, nullable=False)
+	
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+	user = db.relationship('User', back_populates='budgets')
+	expenses = db.relationship('Expense', back_populates='budget', cascade='all, delete-orphan')
