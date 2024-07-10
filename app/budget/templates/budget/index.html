@@ -3,8 +3,89 @@
 {% block title %} Budgets {% endblock %}
 
 {% block content %}
+<!-- <nav class="mb-2" aria-label="breadcrumb">
+	<ol class="breadcrumb mb-0">
+		<li class="breadcrumb-item active">All Budgets</li>
+	</ol>
+</nav> -->
+<div class="col-12 col-sm-auto col-xl-8">
+	<h2 class="mb-0">Budgets</h2>
+</div>
+<div id="tableExample3" data-list='{"valueNames":["name","amount","start_date", "end_date"],"page":10,"pagination":true}'>
+	<a class="btn btn-outline-primary mt-4" href="{{ url_for('budget.create_budget') }}"><span class="fas fa-plus me-2"></span>Add Budget</a>
+	<div class="search-box mb-3 mt-4 mx-auto">
+		<form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+			<input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
+			<span class="fas fa-search search-box-icon"></span>
+		</form>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped table-sm fs-9 mb-0">
+			<thead>
+				<tr>
+					<th class="sort border-top border-translucent ps-3" data-sort="name">NAME</th>
+					<th class="sort border-top" data-sort="amount">AMOUNT</th>
+					<th class="sort border-top" data-sort="start_date">START DATE</th>
+					<th class="sort border-top" data-sort="end_date">END DATE</th>
+					<th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+				</tr>
+			</thead>
+			<tbody class="list">
+				{% for budget in budgets %}
+				<tr>
+					<td class="align-middle ps-3 name">{{ budget.name }}</td>
+					<td class="align-middle amount">{{ budget.amount }}</td>
+					<td class="align-middle start_date">{{ budget.start_date }}</td>
+					<td class="align-middle end_date">{{ budget.end_date }}</td>
+					<td class="align-middle white-space-nowrap text-end pe-0">
+						<div class="btn-reveal-trigger position-static">
+							<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+								type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+								aria-expanded="false" data-bs-reference="parent">
+								<span class="fas fa-ellipsis-h fs-10"></span>
+							</button>
+							<div class="dropdown-menu dropdown-menu-end py-2">
+								<a class="dropdown-item" href="/budgets/{{ budget.id }}">View</a>
+								<a class="dropdown-item" href="/budgets/{{ budget.id }}/edit">Edit</a>
+								<div class="dropdown-divider"></div>
+								<form action="{{ url_for('budget.delete_budget', budget_id=budget.id) }}" method="POST">
+									<button class="dropdown-item text-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Remove</button>
+								</form>
+							</div>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% if not budgets %}
+		<div class="d-flex flex-center">
+			<p class="mb-4 mt-4 fs-9"> No Data Available</p>
+		</div>
+		{% endif %}
+	</div>
+	<div class="d-flex flex-between-center pt-3 mb-3">
+		<div class="pagination d-none"></div>
+		<p class="mb-0 fs-9">
+			<span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
+			<span class="d-none d-sm-inline-block"> &mdash; </span>
+			<a class="fw-semibold" href="#!" data-list-view="*">
+				View all
+				<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
+			</a><a class="fw-semibold d-none" href="#!" data-list-view="less">
+				View Less
+				<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
+			</a>
+		</p>
+		<div class="d-flex">
+			<button class="btn btn-sm btn-primary" type="button" data-list-pagination="prev"><span>Previous</span></button>
+			<button class="btn btn-sm btn-primary px-4 ms-2" type="button"
+				data-list-pagination="next"><span>Next</span></button>
+		</div>
+	</div>
+</div>
 
-<h1>all budgets {{budget_id}}</h1>
+
 
 
 

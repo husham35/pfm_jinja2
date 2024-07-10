@@ -1,10 +1,72 @@
 {% extends 'base.html' %}
 
-{% block title %} Budget {% endblock %}
+{% block title %} Budget{% endblock %}
 
 {% block content %}
+<nav class="mb-2" aria-label="breadcrumb">
+	<ol class="breadcrumb mb-0">
+		<li class="breadcrumb-item"><a href="/budgets">Budgets</a></li>
+		<li class="breadcrumb-item active">View Budget</li>
+	</ol>
+</nav>
+<div class="col-12 col-sm-auto col-xl-8">
+	<h2 class="mb-0">View a budget</h2>
+</div>
 
-<h1>single budgets {{budget_id}}</h1>
+	<div class="row justify-content-between align-items-end g-3 mb-5">
+		<div class="col-12 col-sm-auto col-xl-8">
+		</div>
+	</div>
+	<div class="row g-5">
+		<div class="col-xl-8">
+			<div class="row gx-3 gy-4">
+				<!-- <h4 class="fs-7 mb-0">Budget Details</h4> -->
+				<div class="col-sm-6 col-md-12">
+					<div class="form-floating">
+						<input class="form-control" id="floatingEventInput" name="name" value="{{ budget.name }}"
+							type="text" placeholder="Budget name" readonly disabled/>
+						<label for="floatingEventInput">Name</label>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-12">
+					<div class="form-floating">
+						<input class="form-control" id="floatingEventInput" name="amount"
+							value="{{ budget.amount }}" type="number" placeholder="Budget amount" readonly disabled/>
+						<label for="floatingEventInput">Amount</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="flatpickr-input-container">
+						<div class="form-floating">
+							<input class="form-control datetimepicker" id="startDatepicker" name="start_date"
+								value="{{ budget.start_date }}" type="text" placeholder="Start date"
+								data-options='{"disableMobile":true}' readonly disabled/>
+							<span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary"></span>
+							<label class="ps-6" for="startDatepicker">Start date</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="flatpickr-input-container">
+						<div class="form-floating">
+							<input class="form-control datetimepicker" id="endDatepicker" name="end_date"
+								value="{{ budget.end_date }}" type="text" placeholder="End date"
+								data-options='{"disableMobile":true}' readonly disabled/>
+							<span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary"></span>
+							<label class="ps-6" for="endDatepicker">End date</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="col-12 col-sm-auto col-xl-4">
+		<div class="d-flex">
+			<a class="btn btn-outline-warning me-1 mb-1" href="/budgets">Cancel</a>
+			<a class="btn btn-outline-success me-1 mb-1" href="{{ url_for('budget.edit_budget', budget_id=budget.id) }}">Edit</a>
+		</div>
+	</div>
 
 {% endblock %}
 

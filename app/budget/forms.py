@@ -13,17 +13,17 @@ def date_not_earlier(form, field):
 
 class CreateBudgetForm(FlaskForm):
 	name = StringField('Name', validators=[DataRequired(), Length(min=2, max=200)])
-	start_date = DateField('Start Date', validators=[DataRequired()], format='%d-%m-%Y')
-	end_date = DateField('End Date', validators=[DataRequired(), date_not_earlier], format='%d-%m-%Y')
-	limit = FloatField('Limit', validators=[DataRequired()])
+	start_date = DateField('Start Date', validators=[DataRequired()], format='%Y-%m-%d')
+	end_date = DateField('End Date', validators=[DataRequired(), date_not_earlier], format='%Y-%m-%d')
+	amount = FloatField('Amount', validators=[DataRequired()])
 	submit = SubmitField('Save')
      
 
 class UpdateBudgetForm(FlaskForm):
 	name = StringField('Name', validators=[DataRequired(), Length(min=2, max=200)])
-	start_date = DateField('Start Date', validators=[DataRequired()], format='%d-%m-%Y')
-	end_date = DateField('End Date', validators=[DataRequired(), date_not_earlier], format='%d-%m-%Y')
-	limit = FloatField('Limit', validators=[DataRequired()])
+	start_date = DateField('Start Date', validators=[DataRequired()], format='%Y-%m-%d')
+	end_date = DateField('End Date', validators=[DataRequired(), date_not_earlier], format='%Y-%m-%d')
+	amount = FloatField('Amount', validators=[DataRequired()])
 	submit = SubmitField('Update')
 
 

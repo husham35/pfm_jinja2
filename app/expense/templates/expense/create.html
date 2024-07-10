@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %} Add New Expense {% endblock %}
+
+{% block content %}
+	<nav class="mb-2" aria-label="breadcrumb">
+		<ol class="breadcrumb mb-0">
+			<li class="breadcrumb-item"><a href="/expenses">Expenses</a></li>
+			<li class="breadcrumb-item active">Create Expense</li>
+		</ol>
+	</nav>
+	<div class="col-12 col-sm-auto col-xl-8">
+		<h2 class="mb-0">New Expense</h2>
+	</div>
+	<form action="{{url_for('expense.create_expense')}}" class="mb-9" method="POST">
+		{{ form.hidden_tag() }}
+		<div class="row justify-content-between align-items-end g-3 mb-5">
+			<div class="col-12 col-sm-auto col-xl-8">
+			</div>
+		</div>
+		<div class="row g-5">
+			<div class="col-xl-8">
+				<div class="row gx-3 gy-4">
+					<div class="col-sm-6">
+						<div class="form-floating">
+							<input class="form-control" id="floatingEventInput" name="amount" value="{{ request.form.amount }}" type="number" placeholder="Expense amount" />
+							<label for="floatingEventInput">Amount</label>
+							{% for error in form.amount.errors %}
+							<div class="text-danger fs-9">{{ error }}</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="flatpickr-input-container">
+							<div class="form-floating">
+								<input class="form-control datetimepicker" id="startDatepicker" name="date" value="{{ request.form.date }}" type="text" placeholder="Start date" data-options='{"disableMobile":true}' />
+								<span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary"></span>
+								<label class="ps-6" for="startDatepicker">Date</label>
+								{% for error in form.date.errors %}
+								<div class="text-danger fs-9">{{ error }}</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					<div class="col-12 gy-6">
+						<div class="form-floating">
+							<div class="form-floating">
+								<textarea class="form-control" id="" name="description" style="height: 128px">{{ request.form.description }}</textarea>
+								<label for="floatingProjectDescription">Description</label>
+							</div>
+							{% for error in form.description.errors %}
+							<div class="text-danger fs-9">{{ error }}</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<div class="form-floating">
+							<select class="form-select" id="floatingSelectTask" name="budget_id" >
+								<option selected="selected">Select budget</option>
+								{% for value, label in form.budget_id.choices %}
+								<option value="{{ value }}" {% if form.budget_id.data|int == value %}selected{% endif %}>{{ label }}</option>
+								{% endfor %}
+							</select>
+							<label for="floatingSelectTask">{{ form.budget_id.label }}</label>
+							{% for error in form.budget_id.errors %}
+							<div class="text-danger fs-9">{{ error }}</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<div class="form-floating">
+							<select class="form-select" id="floatingSelectTask" name="category_id" >
+								<option >Select category</option>
+								{% for value, label in form.category_id.choices %}
+								<option value="{{ value }}" {% if form.category_id.data|int == value %}selected{% endif %}>{{ label }}</option>
+								{% endfor %}
+							</select>
+							<label for="floatingSelectTask">{{ form.category_id.label }}</label>
+							{% for error in form.category_id.errors %}
+							<div class="text-danger fs-9">{{ error }}</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<div class="form-floating">
+							<select class="form-select" id="floatingSelectTask" name="category_item_id" >
+								<option >Select category item</option>
+								{% for value, label in form.category_item_id.choices %}
+								<option value="{{ value }}" {% if form.category_item_id.data|int == value %}selected{% endif %}>{{ label }}</option>
+								{% endfor %}
+							</select>
+							<label for="floatingSelectTask">Category Item</label>
+							{% for error in form.category_item_id.errors %}
+							<div class="text-danger fs-9">{{ error }}</div>
+							{% endfor %}
+							{{request.form.category_item_id}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="col-12 col-sm-auto col-xl-4">
+			<div class="d-flex">
+				<a class="btn btn-outline-warning me-1 mb-1" href="/expenses">Cancel</a>
+				<button class="btn btn-outline-success me-1 mb-1" type="submit">Save</button>
+				
+			</div>
+		</div>
+	</form>
+{% endblock %}
+
+

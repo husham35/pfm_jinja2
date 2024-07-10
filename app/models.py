@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
 	budgets = db.relationship('Budget', back_populates='user', cascade='all, delete-orphan')
 	expenses = db.relationship('Expense', back_populates='user', cascade='all, delete-orphan')
 	categories = db.relationship('ExpenseCategory', back_populates='user', cascade='all, delete-orphan')
+	items = db.relationship('ExpenseCategoryItem', back_populates='user', cascade='all, delete-orphan')
 
 	def set_password(self, password):
 		self.password_hash = generate_password_hash(password)

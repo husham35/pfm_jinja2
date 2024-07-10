@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %} Expense{% endblock %}
+
+{% block content %}
+<nav class="mb-2" aria-label="breadcrumb">
+	<ol class="breadcrumb mb-0">
+		<li class="breadcrumb-item"><a href="/expenses">Expenses</a></li>
+		<li class="breadcrumb-item active">View Expense</li>
+	</ol>
+</nav>
+<div class="col-12 col-sm-auto col-xl-8">
+	<h2 class="mb-0">View a expense</h2>
+</div>
+	
+	<div class="row justify-content-between align-items-end g-3 mb-5">
+		<div class="col-12 col-sm-auto col-xl-8">
+		</div>
+	</div>
+	<div class="row g-5">
+		<div class="col-xl-8">
+			<div class="row gx-3 gy-4">
+				<div class="col-sm-6">
+					<div class="form-floating">
+						<input class="form-control" id="floatingEventInput" name="amount"
+							value="{{ expense.amount }}" type="number" placeholder="Expense amount" readonly disabled/>
+						<label for="floatingEventInput">Amount</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="flatpickr-input-container">
+						<div class="form-floating">
+							<input class="form-control datetimepicker" id="startDatepicker" name="date"
+								value="{{ expense.date }}" type="text" placeholder="Start date"
+								data-options='{"disableMobile":true}' readonly disabled/>
+							<span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary"></span>
+							<label class="ps-6" for="startDatepicker">Date</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 gy-6">
+					<div class="form-floating">
+						<div class="form-floating">
+							<textarea class="form-control" id="" name="description"
+								style="height: 128px" readonly disabled>{{ expense.description }}</textarea>
+							<label for="floatingProjectDescription">Description</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<div class="form-floating">
+						<select class="form-select" id="floatingSelectTask" name="expense.budget_id" readonly disabled>
+							<option selected="selected">Select budget</option>
+							{% for value, label in form.budget_id.choices %}
+							<option value="{{ value }}" {% if expense.budget_id == value %}selected{% endif %}>{{ label }}</option>
+							{% endfor %}
+						</select>
+						<label for="floatingSelectTask">Budget</label>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<div class="form-floating">
+						<select class="form-select" id="floatingSelectTask" name="expense.category_id" readonly disabled>
+							<option>Select category</option>
+							{% for value, label in form.category_id.choices %}
+							<option value="{{ value }}" {% if expense.category_id|int == value %}selected{% endif %}>{{ label }}</option>
+							{% endfor %}
+						</select>
+						<label for="floatingSelectTask">Category</label>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<div class="form-floating">
+						<select class="form-select" id="floatingSelectTask" name="expense.category_item_id" readonly disabled>
+							<option>Select category item</option>
+							{% for value, label in form.category_item_id.choices %}
+							<option value="{{ value }}" {% if expense.category_item_id|int == value %}selected{% endif %}>{{ label }}</option>
+							{% endfor %}
+						</select>
+						<label for="floatingSelectTask">Category Item</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="col-12 col-sm-auto col-xl-4">
+		<div class="d-flex">
+			<a class="btn btn-outline-warning me-1 mb-1" href="/expenses">Cancel</a>
+			<a class="btn btn-outline-success me-1 mb-1" href="{{ url_for('expense.edit_expense', expense_id=expense.id) }}">Edit</a>
+		</div>
+	</div>
+
+{% endblock %}
+
+
