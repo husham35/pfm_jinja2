@@ -18,8 +18,6 @@ The Personal Finance Manager is a Flask-based web application that allows regist
 - Flask-Login
 - SQLite (can be replaced with PostgreSQL or any other SQL database)
 
-## Installation
-
 ### Prerequisites
 
 - Python 3.x
@@ -28,18 +26,52 @@ The Personal Finance Manager is a Flask-based web application that allows regist
 ### Steps
 
 1. **Clone the repository**:
+
    ```bash
-   git clone https://github.com/your-username/personal-finance-manager.git
-   cd personal-finance-manager
+   git clone https://github.com/husham35/pfm_jinja2.git
+   cd pfm_jinja2
    ```
 
-python3 -m venv venv
-source venv/bin/activate # On Windows use `venv\Scripts\activate`
+2. **Create a virtual environment**:
 
-pip install -r requirements.txt
+   ```
+   python3 -m venv venv
+   source venv/bin/activate # On Windows use `venv\Scripts\activate`
+   ```
 
-flask db init
-flask db migrate -m "Initial migration"
-flask db upgrade
+3. **Install dependencies**:
 
-flask run
+   ```
+   pip install -r requirements.txt
+   ```
+
+4. **Set up the database**:
+
+   ```
+   flask db init
+   flask db migrate -m "Initial migration"
+   flask db upgrade
+   ```
+
+5. **Set up the database**:
+
+   ```
+   flask run
+   ```
+
+6. **Contact**:
+
+   ```
+   For any inquiries or feedback, please contact [husham35@gmail.com].
+   ```
+
+### Explanation:
+
+1. **Introduction**: Brief overview of what the app does.
+2. **Features**: Key functionalities of the app.
+3. **Technologies Used**: List of technologies used in the app.
+4. **Clone the repository**: Clone the repository for your use
+5. **Create a virtual environment**: Create the virtual environment for the app
+6. **Install dependencies**: Install the required depencies to run the app
+7. **Set up the database**: Set up the database
+8. **Contact**: Contact the repo owner
