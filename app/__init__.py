@@ -15,9 +15,9 @@ from .budget.models import Budget
 from .expense.models import Expense, ExpenseCategory, ExpenseCategoryItem
 
 
-# , static_folder='static', static_url_path='/', static_folder='static'
+# , static_folder='static'
 def create_app():
-	app = Flask(__name__)
+	app = Flask(__name__, static_url_path='/', static_folder='static')
 	app.secret_key = 'your_secret_key'
 	app.config['SESSION_TYPE'] = 'filesystem'
 	app.config.from_object('config.Config')
